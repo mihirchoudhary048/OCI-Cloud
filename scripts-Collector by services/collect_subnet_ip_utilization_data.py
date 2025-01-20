@@ -1,0 +1,84 @@
+import subprocess
+import json
+import os
+import sys
+from datetime import datetime
+
+def run_oci_command(command):
+    """Run an OCI CLI command and capture the JSON result."""
+    try:
+        result = subprocess.check_output(command, shell=True, text=True)
+        if not result.strip():
+            print(f"Command produced no output: {command}")
+            return None
+        return json.loads(result)
+    except subprocess.CalledProcessError as e:
+        print(f"Command failed: {e}")
+        return None
+
+def get_all_regions():
+    """Retrieve all regions the tenancy is subscribed to."""
+    command = "oci iam region-subscription list --all --output json"
+    result = run_oci_command(command)
+    if result:
+        return [region['region-name'] for region in result.get('data', [])]
+    return []
+
+def get_all_compartments():
+    """Retrieve all compartments in the tenancy."""
+    command = "oci iam compartment list --all --output json"
+    return run_oci_command(command)
+
+def get_subnets_for_compartment(compartment_id, region):
+    """Retrieve all subnet details for a given compartment in a specific region."""
+    command = f"oci network subnet list --compartment-id {compartment_id} --region {region} --all --output json"
+    return run_oci_command(command)
+
+def get_subnet_ip_utilization(subnet_id, region):
+    """Retrieve IP utilization details for a given subnet."""
+    command = f"oci network ipam get-subnet-ip-inventory --subnet-id {subnet_id} --region {region} --output json"
+    return run_oci_command(command)
+
+def save_json_to_file(directory, filename, data):
+    """Save data to a JSON file."""
+    filepath = os.path.join(directory, filename)
+    with open(filepath, 'w') as file:
+        json.dump(data, file, indent=4)
+    print(f"Data successfully saved to {filepath}")
+
+def collect_subnet_ip_utilization(output_dir):
+    regions = get_all_regions()
+    if not regions:
+        print("Failed to retrieve regions.")
+        return
+
+    compartments = get_all_compartments()
+    if not compartments:
+        print("Failed to retrieve compartments.")
+        return
+
+    for region in regions:
+        for compartment in compartments.get('data', []):
+            compartment_id = compartment['id']
+            compartment_name = compartment['name']
+            print(f"Processing subnet IP utilization for compartment: {compartment_name} (ID: {compartment_id}) in region: {region}")
+
+            subnets = get_subnets_for_compartment(compartment_id, region)
+            if subnets and subnets.get('data'):
+                for subnet in subnets['data']:
+                    subnet_id = subnet['id']
+                    subnet_name = subnet['display-name']
+                    print(f"  Collecting IP utilization for subnet: {subnet_name} (ID: {subnet_id})")
+
+                    ip_utilization = get_subnet_ip_utilization(subnet_id, region)
+                    if ip_utilization:
+                        save_json_to_file(output_dir, f"{region}_{compartment_name}_{subnet_name}_ip_utilization.json", ip_utilization)
+                    else:
+                        print(f"  No IP utilization data found for subnet: {subnet_name} (ID: {subnet_id})")
+            else:
+                print(f"No subnets found for compartment: {compartment_name} in region: {region}")
+
+if __name__ == "__main__":
+    output_directory = sys.argv[1]
+    collect_subnet_ip_utilization(output_directory)
+
