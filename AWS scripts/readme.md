@@ -1,10 +1,4 @@
-README.md (Final Version - Optimized for GitHub)
-md
-Copy
-Edit
 # 🚀 AWS Inventory Automation with Python 🖥️📊  
-
-![AWS Inventory Automation](https://user-images.githubusercontent.com/123456789/your-banner-image.png)
 
 📌 **Automate AWS Inventory Collection & Generate Detailed Excel Reports** using **Python & Boto3**  
 
