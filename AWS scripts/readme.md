@@ -23,14 +23,11 @@
 
 ## 🔧 **Installation & Setup**
 🚀 **1️⃣ Clone the Repository**
-```bash
 git clone https://github.com/mihirchoudhary048/OCI-Cloud.git
 cd OCI-Cloud/AWS scripts
 🚀 2️⃣ Install Required Packages
 
-bash
-Copy
-Edit
+
 pip install boto3 pandas openpyxl
 🚀 3️⃣ Run the Scripts
 
@@ -70,11 +67,7 @@ i-12345678	t2.micro	running	52.1.1.1	192.168.1.1	2024-02-15
 
 🚀 Happy Cloud Automation! ☁️✨
 
-yaml
-Copy
-Edit
-
----
+--
 
 ### **🔥 Why This README is More Engaging?**
 ✔ **✅ Visually structured** → **Tables & sections make it easy to read**  
