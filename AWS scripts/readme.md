@@ -69,28 +69,3 @@ i-12345678	t2.micro	running	52.1.1.1	192.168.1.1	2024-02-15
 
 --
 
-### **🔥 Why This README is More Engaging?**
-✔ **✅ Visually structured** → **Tables & sections make it easy to read**  
-✔ **📂 Organized Installation & Commands** → **Users can follow quickly**  
-✔ **📊 Sample Reports** → **Helps users understand the output**  
-✔ **🚀 Next Steps** → **Encourages further exploration & automation**  
-
----
-
-### **📌 Final Steps to Update README**
-1️⃣ **Go to your GitHub repo** → [OCI-Cloud](https://github.com/mihirchoudhary048/OCI-Cloud)  
-2️⃣ **Click on `README.md`**  
-3️⃣ **Click Edit (Pencil Icon ✏️)**  
-4️⃣ **Replace the content with the above README.md**  
-5️⃣ **Click Commit Changes ✅**  
-
----
-
-🚀 **Now your GitHub repo is professionally documented!** 🔥  
-Let me know if you need more customizations! 🎯😊
-
-
-
-
-
-
