@@ -60,27 +60,27 @@ Each script is designed for a specific task in OCI. Below are examples of how to
 
 ### Running the Orphan Resources Collector
 ```bash
-python OCI_Orphan_Resources_Collector/orphan_collector.py --tenancy_id <your_tenancy_id>
+python OCI_Orphan_Resources_Collector/orphan_collector.py
 ```
 
 ### Exporting OCI Policies
 ```bash
-python OCI_Policy_Collector/policy_export.py --tenancy_id <your_tenancy_id>
+python OCI_Policy_Collector/policy_export.py 
 ```
 
 ### Collecting Security List Details
 ```bash
-python OCI_Security_List/security_audit.py --tenancy_id <your_tenancy_id>
+python OCI_Security_List/security_audit.py 
 ```
 
 ### Fetching VCN Information
 ```bash
-python OCI_VCN_Collector/vcn_discovery.py --tenancy_id <your_tenancy_id>
+python OCI_VCN_Collector/vcn_discovery.py 
 ```
 
 ### Running All Resource Collector with CloudGuard
 ```bash
-python OCI_all_resources_collector_with_CloudGuard/resource_collector.py --tenancy_id <your_tenancy_id>
+python OCI_all_resources_collector_with_CloudGuard/resource_collector.py 
 ```
 
 ## 📊 Output Formats
